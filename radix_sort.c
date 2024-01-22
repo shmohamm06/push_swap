@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:02:39 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/21 12:35:51 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/01/22 10:44:57 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	radix_sort_stack_b(t_stack *stack, int b_size, int bit_size, int j)
 {
-	while (b_size-- && j <= bit_size && !is_stack_sorted(stack))
+	int	current_element;
+
+	while (b_size-- > 0 && j <= bit_size && !is_stack_sorted(stack))
 	{
-		if (((stack->stack_b[0] >> j) & 1) == 0)
+		current_element = stack->stack_b[0];
+		if (((current_element >> j) & 1) == 0)
 			rotate_elements(stack->stack_b, stack->stack_b_size, "up", "b");
 		else
 			push_elements("pa", stack);

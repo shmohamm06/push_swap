@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:32:23 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/21 12:46:40 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/01/22 13:53:58 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	exit_program(t_stack *stack, char *msg)
 			free(stack->stack_b);
 		if (stack->join_args != NULL)
 			free(stack->join_args);
-		if (stack != NULL)
-			free(stack);
+		// if (stack != NULL)
+		// free(stack);
 	}
 	exit(1);
 }

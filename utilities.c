@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:46:19 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/21 12:44:22 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/01/22 11:01:56 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,10 @@ void	initialize_stacks(int argc, char **argv, t_stack *stack)
 			stack->stack_a_size++;
 		i++;
 	}
-	stack->stack_a = malloc(stack->stack_a_size * sizeof * stack->stack_a);
+	stack->stack_a = malloc(stack->stack_a_size * sizeof(int));
 	if (stack->stack_a == NULL)
 		exit_program(stack, "Error\n");
-	stack->stack_b = malloc(stack->stack_a_size * sizeof * stack->stack_b);
+	stack->stack_b = malloc(stack->stack_a_size * sizeof(int));
 	if (stack->stack_b == NULL)
 		exit_program(stack, "Error\n");
 }
@@ -110,7 +110,7 @@ void	create_index(t_stack *stack)
 	int	k;
 	int	*new_a;
 
-	new_a = malloc(stack->stack_a_size * sizeof * new_a);
+	new_a = malloc(stack->stack_a_size * sizeof(int));
 	if (new_a == NULL)
 		exit_program(stack, "Error\n");
 	i = -1;

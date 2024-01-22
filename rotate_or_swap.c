@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:46:14 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/21 12:49:35 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/01/22 10:52:33 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	push_elements(char *str, t_stack *stack)
 		if (stack->stack_b_size <= 0)
 			return ;
 		tmp = stack->stack_b[0];
-		ft_memmove(stack->stack_b + 1, stack->stack_b, sizeof(int)
-			* stack->stack_b_size);
+		ft_memmove(stack->stack_a + 1, stack->stack_a, sizeof(int)
+			* stack->stack_a_size);
 		stack->stack_a[0] = tmp;
 		stack->stack_b_size--;
 		ft_memmove(stack->stack_b, stack->stack_b + 1, sizeof(int)
