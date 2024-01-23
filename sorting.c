@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_functions.c                                   :+:      :+:    :+:   */
+/*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:46:16 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/21 12:01:00 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:07:02 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_three_items(t_stack *stack)
+void	three_nbrs(t_stack *stack)
 {
 	if (stack->stack_a[2] != 2)
 	{
@@ -25,7 +25,7 @@ void	sort_three_items(t_stack *stack)
 		swap_elements("sa", stack->stack_a, stack->stack_a_size);
 }
 
-void	sort_four_to_five_items(t_stack *stack)
+void	four_or_five_nbrs(t_stack *stack)
 {
 	while (stack->stack_b_size <= 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 12:32:23 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/22 13:53:58 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/01/23 10:02:40 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	exit_program(t_stack *stack, char *msg)
 			free(stack->stack_b);
 		if (stack->join_args != NULL)
 			free(stack->join_args);
-		// if (stack != NULL)
-		// free(stack);
 	}
 	exit(1);
 }
@@ -35,10 +33,10 @@ void	validate_arguments(int argc, char **argv)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	if (argc < 2)
 		exit_program(NULL, "");
-	while (++i < argc)
+	while (i < argc)
 	{
 		j = 0;
 		if (!argv[i][0] || (argv[i][0] && argv[i][0] == ' '))
@@ -46,15 +44,15 @@ void	validate_arguments(int argc, char **argv)
 		while (argv[i][j] != '\0')
 		{
 			if ((!(ft_isdigit(argv[i][j])) && (argv[i][j] != ' ')
-					&& (argv[i][j] != '-' && argv[i][j] != '+'
-						&& argv[i][j] != ' ')) || (argv[i][j] == '-'
-					&& argv[i][j + 1] == '\0') || (argv[i][j] == '+'
-					&& argv[i][j + 1] == '\0') || (argv[i][j] == '-'
-					&& argv[i][j + 1] == ' ') || (argv[i][j] == '+' && argv[i][j
-					+ 1] == ' '))
+					&& (argv[i][j] != '-' && argv[i][j] != '+'))
+				|| (argv[i][j] == '-' && argv[i][j + 1] == '\0')
+				|| (argv[i][j] == '+' && argv[i][j + 1] == '\0')
+				|| (argv[i][j] == '-' && argv[i][j + 1] == ' ')
+				|| (argv[i][j] == '+' && argv[i][j + 1] == ' '))
 				exit_program(NULL, "Error\n");
 			j++;
 		}
+		i++;
 	}
 }
 
@@ -84,6 +82,29 @@ void	combine_arguments(int argc, char **argv, t_stack *stack)
 		exit_program(stack, "Error\n");
 	if (tmp)
 		free(tmp);
+}
+
+void	dup_or_sorted(t_stack *stack, int i)
+{
+	int	j;
+
+	j = 0;
+	if (i == 0)
+	{
+		while (i < stack->stack_a_size)
+		{
+			j = i + 1;
+			while (j < stack->stack_a_size)
+			{
+				if (stack->stack_a[i] == stack->stack_a[j])
+					exit_program(stack, "Error\n");
+				j++;
+			}
+			i++;
+		}
+	}
+	if (is_stack_sorted(stack))
+		exit_program(stack, NULL);
 }
 
 int	is_stack_sorted(t_stack *stack)
