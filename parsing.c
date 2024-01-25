@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/21 12:32:23 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/23 10:02:40 by shmohamm         ###   ########.fr       */
+/*   Created: 2024/01/23 17:43:48 by shmohamm          #+#    #+#             */
+/*   Updated: 2024/01/25 14:04:30 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,38 @@ void	exit_program(t_stack *stack, char *msg)
 	exit(1);
 }
 
+void	check_for_dup_or_sorted(t_stack *stack, int i)
+{
+	int	j;
+
+	j = 0;
+	if (i == 0)
+	{
+		while (i < stack->stack_a_size)
+		{
+			j = i + 1;
+			while (j < stack->stack_a_size)
+			{
+				if (stack->stack_a[i] == stack->stack_a[j])
+					exit_program(stack, "Duplicate Found\n");
+				j++;
+			}
+			i++;
+		}
+	}
+	if (is_stack_sorted(stack))
+		exit_program(stack, NULL);
+}
+
 void	validate_arguments(int argc, char **argv)
 {
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	if (argc < 2)
 		exit_program(NULL, "");
-	while (i < argc)
+	while (++i < argc)
 	{
 		j = 0;
 		if (!argv[i][0] || (argv[i][0] && argv[i][0] == ' '))
@@ -52,7 +75,6 @@ void	validate_arguments(int argc, char **argv)
 				exit_program(NULL, "Error\n");
 			j++;
 		}
-		i++;
 	}
 }
 
@@ -62,9 +84,9 @@ void	combine_arguments(int argc, char **argv, t_stack *stack)
 	char	*tmp2;
 	int		i;
 
-	i = 0;
+	i = 1;
 	tmp2 = ft_strdup("");
-	while (++i < argc && argv[i] != NULL)
+	while (i < argc && argv[i] != NULL)
 	{
 		tmp = ft_strjoin(tmp2, argv[i]);
 		if (tmp2)
@@ -76,35 +98,13 @@ void	combine_arguments(int argc, char **argv, t_stack *stack)
 				free(tmp);
 			tmp = tmp2;
 		}
+		i++;
 	}
 	stack->join_args = ft_strdup(tmp);
 	if (stack->join_args == NULL)
 		exit_program(stack, "Error\n");
 	if (tmp)
 		free(tmp);
-}
-
-void	dup_or_sorted(t_stack *stack, int i)
-{
-	int	j;
-
-	j = 0;
-	if (i == 0)
-	{
-		while (i < stack->stack_a_size)
-		{
-			j = i + 1;
-			while (j < stack->stack_a_size)
-			{
-				if (stack->stack_a[i] == stack->stack_a[j])
-					exit_program(stack, "Error\n");
-				j++;
-			}
-			i++;
-		}
-	}
-	if (is_stack_sorted(stack))
-		exit_program(stack, NULL);
 }
 
 int	is_stack_sorted(t_stack *stack)

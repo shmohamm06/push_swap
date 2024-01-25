@@ -5,39 +5,39 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 17:46:19 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/23 09:52:30 by shmohamm         ###   ########.fr       */
+/*   Created: 2024/01/23 17:45:26 by shmohamm          #+#    #+#             */
+/*   Updated: 2024/01/25 14:04:10 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atol(const char *str, t_stack *stack)
+int	ft_atol(const char *n, t_stack *stack)
 {
 	int			i;
 	long		sign;
-	long long	result;
+	long long	res;
 
-	result = 0;
+	res = 0;
 	sign = 1;
 	i = 0;
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
+	while (n[i] == ' ' || (n[i] >= '\t' && n[i] <= '\r'))
 		i++;
-	if (str[i] == '+' || str[i] == '-')
+	if (n[i] == '+' || n[i] == '-')
 	{
-		if (str[i] == '-')
+		if (n[i] == '-')
 			sign = -1;
 		i++;
 	}
-	while (str[i])
+	while (n[i])
 	{
-		if (result > INT_MAX || (result * sign) < INT_MIN || ft_strlen(str) > 11)
-			exit_program(stack, "Error\n");
-		if (!(str[i] >= '0' && str[i] <= '9'))
-			exit_program(stack, "Error\n");
-		result = result * 10 + (str[i++] - '0');
+		if (res > 2147483647 || (res * sign) < -2147483648 || ft_strlen(n) > 11)
+			exit_program(stack, "Atol Failed\n");
+		if (!(n[i] >= '0' && n[i] <= '9'))
+			exit_program(stack, "Atol Failed\n");
+		res = res * 10 + (n[i++] - '0');
 	}
-	return ((int)(result * sign));
+	return ((int)(res * sign));
 }
 
 void	read_numbers(t_stack *stack)
@@ -74,42 +74,32 @@ void	initialize_stacks(int argc, char **argv, t_stack *stack)
 	}
 	stack->stack_a = malloc(stack->stack_a_size * sizeof(int));
 	if (stack->stack_a == NULL)
-		exit_program(stack, "Error\n");
+		exit_program(stack, "Malloc Failed\n");
 	stack->stack_b = malloc(stack->stack_a_size * sizeof(int));
 	if (stack->stack_b == NULL)
-		exit_program(stack, "Error\n");
-}
-
-void	initialize_index(int *new_a, t_stack *stack)
-{
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	while (i < stack->stack_a_size)
-	{
-		k = 0;
-		j = 0;
-		while (j < stack->stack_a_size)
-		{
-			if (stack->stack_a[i] > stack->stack_a[j])
-				k++;
-			j++;
-		}
-		new_a[i] = k;
-	}
+		exit_program(stack, "Malloc Failed\n");
 }
 
 void	create_index(t_stack *stack)
 {
-	int	*new_a;
 	int	i;
+	int	j;
+	int	k;
+	int	*new_a;
 
 	new_a = malloc(stack->stack_a_size * sizeof(int));
 	if (new_a == NULL)
-		exit_program(stack, "Error\n");
-	initialize_index(new_a, stack);
+		exit_program(stack, "Malloc Failed\n");
+	i = -1;
+	while (++i < stack->stack_a_size)
+	{
+		k = 0;
+		j = -1;
+		while (++j < stack->stack_a_size)
+			if (stack->stack_a[i] > stack->stack_a[j])
+				k++;
+		new_a[i] = k;
+	}
 	i = stack->stack_a_size;
 	while (i--)
 		stack->stack_a[i] = new_a[i];

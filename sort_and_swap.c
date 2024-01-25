@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting.c                                          :+:      :+:    :+:   */
+/*   sort_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/19 17:46:16 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/23 10:07:02 by shmohamm         ###   ########.fr       */
+/*   Created: 2024/01/23 17:45:03 by shmohamm          #+#    #+#             */
+/*   Updated: 2024/01/25 14:02:51 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	three_nbrs(t_stack *stack)
+void	swap_elements(char *str, int *array, int size)
+{
+	int	tmp;
+
+	if (size <= 0)
+		return ;
+	tmp = array[0];
+	array[0] = array[1];
+	array[1] = tmp;
+	ft_putendl_fd(str, 1);
+}
+
+void	sort_three_items(t_stack *stack)
 {
 	if (stack->stack_a[2] != 2)
 	{
@@ -25,7 +37,7 @@ void	three_nbrs(t_stack *stack)
 		swap_elements("sa", stack->stack_a, stack->stack_a_size);
 }
 
-void	four_or_five_nbrs(t_stack *stack)
+void	sort_four_to_five_items(t_stack *stack)
 {
 	while (stack->stack_b_size <= 1)
 	{
