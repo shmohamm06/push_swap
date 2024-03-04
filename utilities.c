@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	ft_atoi2(const char *n, t_stack *stack)
+int	ft_atoi2(const char *str, t_stack *stack)
 {
 	int	i;
 	int	sign;
@@ -21,21 +21,21 @@ int	ft_atoi2(const char *n, t_stack *stack)
 	res = 0;
 	sign = 1;
 	i = 0;
-	while (n[i] == ' ' || (n[i] >= '\t' && n[i] <= '\r'))
+	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
 		i++;
-	if (n[i] == '+' || n[i] == '-')
+	if (str[i] == '+' || str[i] == '-')
 	{
-		if (n[i] == '-')
+		if (str[i] == '-')
 			sign = -1;
 		i++;
 	}
-	while (n[i])
+	while (str[i])
 	{
-		if (res > INT_MAX || (res * sign) < INT_MIN || ft_strlen(n) > 11)
+		if (res > INT_MAX || (res * sign) < INT_MIN || ft_strlen(str) > 11)
 			exit_program(stack, "Error\n");
-		if (!(n[i] >= '0' && n[i] <= '9'))
+		if (!(str[i] >= '0' && str[i] <= '9'))
 			exit_program(stack, "Error\n");
-		res = res * 10 + (n[i++] - '0');
+		res = res * 10 + (str[i++] - '0');
 	}
 	return ((res * sign));
 }
