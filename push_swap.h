@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:44:43 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/03/04 23:21:47 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/04 23:53:30 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "./libft/libft.h"
 # include <limits.h>
-# include <stdlib.h>c
+# include <stdlib.h>
 # include <unistd.h>
 
 typedef struct s_stack
@@ -54,7 +54,7 @@ void		combine_arguments(int argc, char **argv, t_stack *stack);
 int			is_stack_sorted(t_stack *stack);
 
 // Utilities
-int			ft_atol(const char *n, t_stack *stack);
+int			ft_atoi2(const char *str, t_stack *stack);
 void		read_numbers(t_stack *stack);
 void		initialize_stacks(int argc, char **argv, t_stack *stack);
 void		create_index(t_stack *stack);
