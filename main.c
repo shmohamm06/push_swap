@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:43:05 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/25 13:53:57 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/04 22:55:44 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,6 @@ int	main(int argc, char **argv)
 	else
 		apply_radix_sort(&stack);
 	check_for_dup_or_sorted(&stack, 1);
-	exit_program(&stack, "Invalid Input\n");
+	exit_program(&stack, "Error\n");
 	return (0);
 }
