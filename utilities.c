@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:45:26 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/25 14:04:10 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/04 23:19:57 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	ft_atol(const char *n, t_stack *stack)
 	}
 	while (n[i])
 	{
-		if (res > 2147483647 || (res * sign) < -2147483648 || ft_strlen(n) > 11)
-			exit_program(stack, "Atol Failed\n");
+		if (res > INT_MAX || (res * sign) < INT_MIN || ft_strlen(n) > 11)
+			exit_program(stack, "Error\n");
 		if (!(n[i] >= '0' && n[i] <= '9'))
-			exit_program(stack, "Atol Failed\n");
+			exit_program(stack, "Error\n");
 		res = res * 10 + (n[i++] - '0');
 	}
 	return ((int)(res * sign));
@@ -74,10 +74,10 @@ void	initialize_stacks(int argc, char **argv, t_stack *stack)
 	}
 	stack->stack_a = malloc(stack->stack_a_size * sizeof(int));
 	if (stack->stack_a == NULL)
-		exit_program(stack, "Malloc Failed\n");
+		exit_program(stack, "Error\n");
 	stack->stack_b = malloc(stack->stack_a_size * sizeof(int));
 	if (stack->stack_b == NULL)
-		exit_program(stack, "Malloc Failed\n");
+		exit_program(stack, "Error\n");
 }
 
 void	create_index(t_stack *stack)
@@ -89,7 +89,7 @@ void	create_index(t_stack *stack)
 
 	new_a = malloc(stack->stack_a_size * sizeof(int));
 	if (new_a == NULL)
-		exit_program(stack, "Malloc Failed\n");
+		exit_program(stack, "Error\n");
 	i = -1;
 	while (++i < stack->stack_a_size)
 	{
@@ -104,4 +104,20 @@ void	create_index(t_stack *stack)
 	while (i--)
 		stack->stack_a[i] = new_a[i];
 	free(new_a);
+}
+
+void	exit_program(t_stack *stack, char *msg)
+{
+	if (msg)
+		write(2, msg, ft_strlen(msg));
+	if (stack != NULL)
+	{
+		if (stack->stack_a != NULL)
+			free(stack->stack_a);
+		if (stack->stack_b != NULL)
+			free(stack->stack_b);
+		if (stack->join_args != NULL)
+			free(stack->join_args);
+	}
+	exit(1);
 }
