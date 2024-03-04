@@ -12,11 +12,11 @@
 
 #include "push_swap.h"
 
-int	ft_atol(const char *n, t_stack *stack)
+int	ft_atoi2(const char *n, t_stack *stack)
 {
-	int			i;
-	long		sign;
-	long long	res;
+	int	i;
+	int	sign;
+	int	res;
 
 	res = 0;
 	sign = 1;
@@ -37,7 +37,7 @@ int	ft_atol(const char *n, t_stack *stack)
 			exit_program(stack, "Error\n");
 		res = res * 10 + (n[i++] - '0');
 	}
-	return ((int)(res * sign));
+	return ((res * sign));
 }
 
 void	read_numbers(t_stack *stack)
@@ -45,14 +45,19 @@ void	read_numbers(t_stack *stack)
 	char	**tmp;
 	int		i;
 	int		z;
+	int		num;
 
 	z = 0;
 	tmp = ft_split(stack->join_args, ' ');
 	i = 0;
 	while (tmp[i] != NULL && tmp[i][0] != '\0')
 	{
-		stack->stack_a[z++] = ft_atol(tmp[i++], stack);
-		free(tmp[i - 1]);
+		num = ft_atoi2(tmp[i], stack);
+		if (num > INT_MAX)
+			exit_program(stack, "Error\n");
+		stack->stack_a[z++] = num;
+		free(tmp[i]);
+		i++;
 	}
 	free(tmp);
 }
