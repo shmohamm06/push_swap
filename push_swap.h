@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:44:43 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/25 14:04:20 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/04 23:21:47 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define PUSH_SWAP_H
 
 # include "./libft/libft.h"
-# include <stdlib.h>
+# include <limits.h>
+# include <stdlib.h>c
 # include <unistd.h>
 
 typedef struct s_stack
@@ -37,7 +38,7 @@ void		rotate_down(int *array, int size);
 void		rotate_elements(int *array, int size, char *direction, char *list);
 void		rotate_elements(int *array, int size, char *direction, char *list);
 
-//Push
+// Push
 void		push_pa(t_stack *stack);
 void		push_pb(t_stack *stack);
 void		push_elements(char *str, t_stack *stack);
@@ -47,7 +48,6 @@ void		radix_sort_stack_b(t_stack *stack, int b_size, int bit_size, int j);
 void		apply_radix_sort(t_stack *stack);
 
 // Parsing
-void		exit_program(t_stack *stack, char *msg);
 void		check_for_dup_or_sorted(t_stack *stack, int i);
 void		validate_arguments(int argc, char **argv);
 void		combine_arguments(int argc, char **argv, t_stack *stack);
@@ -58,5 +58,6 @@ int			ft_atol(const char *n, t_stack *stack);
 void		read_numbers(t_stack *stack);
 void		initialize_stacks(int argc, char **argv, t_stack *stack);
 void		create_index(t_stack *stack);
+void		exit_program(t_stack *stack, char *msg);
 
 #endif
