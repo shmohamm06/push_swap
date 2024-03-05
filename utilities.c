@@ -6,17 +6,17 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:45:26 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/03/04 23:19:57 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/05 10:27:55 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi2(const char *str, t_stack *stack)
+long	ft_atoi2(const char *str, t_stack *stack)
 {
-	int	i;
-	int	sign;
-	int	res;
+	int			i;
+	long long	sign;
+	long long	res;
 
 	res = 0;
 	sign = 1;
@@ -31,11 +31,11 @@ int	ft_atoi2(const char *str, t_stack *stack)
 	}
 	while (str[i])
 	{
-		if (res > INT_MAX || (res * sign) < INT_MIN || ft_strlen(str) > 11)
-			exit_program(stack, "Error\n");
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			exit_program(stack, "Error\n");
 		res = res * 10 + (str[i++] - '0');
+		if (res > 2147483648 || (res * sign) < INT_MIN || ft_strlen(str) > 11)
+			exit_program(stack, "Error\n");
 	}
 	return ((res * sign));
 }
@@ -45,7 +45,7 @@ void	read_numbers(t_stack *stack)
 	char	**tmp;
 	int		i;
 	int		z;
-	int		num;
+	long	num;
 
 	z = 0;
 	tmp = ft_split(stack->join_args, ' ');
@@ -55,6 +55,10 @@ void	read_numbers(t_stack *stack)
 		num = ft_atoi2(tmp[i], stack);
 		if (num > INT_MAX)
 			exit_program(stack, "Error\n");
+		if (i > 2)
+		{
+			exit(1);
+		}
 		stack->stack_a[z++] = num;
 		free(tmp[i]);
 		i++;
