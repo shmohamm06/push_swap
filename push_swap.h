@@ -54,7 +54,7 @@ void		combine_arguments(int argc, char **argv, t_stack *stack);
 int			is_stack_sorted(t_stack *stack);
 
 // Utilities
-int			ft_atoi2(const char *str, t_stack *stack);
+long		ft_atoi2(const char *str, t_stack *stack)
 void		read_numbers(t_stack *stack);
 void		initialize_stacks(int argc, char **argv, t_stack *stack);
 void		create_index(t_stack *stack);
