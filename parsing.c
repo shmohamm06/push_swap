@@ -1,39 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   utilities_1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:43:48 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/03/04 22:56:47 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/06 10:58:49 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	check_for_dup_or_sorted(t_stack *stack, int i)
-{
-	int	j;
-
-	j = 0;
-	if (i == 0)
-	{
-		while (i < stack->stack_a_size)
-		{
-			j = i + 1;
-			while (j < stack->stack_a_size)
-			{
-				if (stack->stack_a[i] == stack->stack_a[j])
-					exit_program(stack, "Error\n");
-				j++;
-			}
-			i++;
-		}
-	}
-	if (is_stack_sorted(stack))
-		exit_program(stack, NULL);
-}
 
 void	validate_arguments(int argc, char **argv)
 {
@@ -60,6 +37,29 @@ void	validate_arguments(int argc, char **argv)
 			j++;
 		}
 	}
+}
+
+void	initialize_stacks(int argc, char **argv, t_stack *stack)
+{
+	int	i;
+
+	i = 0;
+	stack->stack_a_size = 0;
+	stack->stack_b_size = 0;
+	while (--argc)
+	{
+		if (ft_wordcount(argv[i + 1], ' '))
+			stack->stack_a_size += ft_wordcount(argv[i + 1], ' ');
+		else
+			stack->stack_a_size++;
+		i++;
+	}
+	stack->stack_a = malloc(stack->stack_a_size * sizeof(int));
+	if (stack->stack_a == NULL)
+		exit_program(stack, "Error\n");
+	stack->stack_b = malloc(stack->stack_a_size * sizeof(int));
+	if (stack->stack_b == NULL)
+		exit_program(stack, "Error\n");
 }
 
 void	combine_arguments(int argc, char **argv, t_stack *stack)
@@ -91,16 +91,24 @@ void	combine_arguments(int argc, char **argv, t_stack *stack)
 		free(tmp_string1);
 }
 
-int	is_stack_sorted(t_stack *stack)
+void	read_numbers(t_stack *stack)
 {
-	int	i;
+	char	**tmp;
+	int		i;
+	int		z;
+	long	num;
 
+	z = 0;
+	tmp = ft_split(stack->join_args, ' ');
 	i = 0;
-	while (i < stack->stack_a_size - 1)
+	while (tmp[i] != NULL && tmp[i][0] != '\0')
 	{
-		if (stack->stack_a[i] > stack->stack_a[i + 1])
-			return (0);
+		num = ft_atoi2(tmp[i], stack);
+		if (num > INT_MAX)
+			exit_program(stack, "Error\n");
+		stack->stack_a[z++] = num;
+		free(tmp[i]);
 		i++;
 	}
-	return (1);
+	free(tmp);
 }
