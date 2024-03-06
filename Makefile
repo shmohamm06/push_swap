@@ -9,7 +9,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 LIB_DIR = libft
 
-SRCS = main.c utilities.c radix_sort.c push.c rotation.c sort_and_swap.c parsing.c
+SRCS = main.c radix_sort.c push.c rotation.c sort_and_swap.c utilities_1.c utilities_2.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(LIB_DIR)/libft.a $(OBJS)
