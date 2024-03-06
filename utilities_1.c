@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:43:48 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/03/06 10:58:49 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:46:47 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ void	validate_arguments(int argc, char **argv)
 	int	j;
 
 	i = 0;
-	if (argc < 2)
-		exit_program(NULL, "");
 	while (++i < argc)
 	{
 		j = 0;
@@ -111,4 +109,20 @@ void	read_numbers(t_stack *stack)
 		i++;
 	}
 	free(tmp);
+}
+
+void	exit_program(t_stack *stack, char *msg)
+{
+	if (msg)
+		write(2, msg, ft_strlen(msg));
+	if (stack != NULL)
+	{
+		if (stack->stack_a != NULL)
+			free(stack->stack_a);
+		if (stack->stack_b != NULL)
+			free(stack->stack_b);
+		if (stack->join_args != NULL)
+			free(stack->join_args);
+	}
+	exit(0);
 }

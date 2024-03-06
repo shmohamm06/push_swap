@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate_or_swap.c                                   :+:      :+:    :+:   */
+/*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:44:21 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/01/25 14:02:34 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:50:22 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 void	rotate_up(int *array, int size)
 {
-	int	tmp;
+	int	temp;
 
 	if (size < 0)
 		return ;
-	tmp = array[0];
+	temp = array[0];
 	ft_memmove(array, array + 1, sizeof(int) * (size - 1));
-	array[size - 1] = tmp;
+	array[size - 1] = temp;
 	write(1, "r", 1);
 }
 
 void	rotate_down(int *array, int size)
 {
-	int	tmp;
+	int	temp;
 
 	if (size < 0)
 		return ;
-	tmp = array[size - 1];
+	temp = array[size - 1];
 	ft_memmove(array + 1, array, sizeof(int) * (size - 1));
-	array[0] = tmp;
+	array[0] = temp;
 	write(1, "rr", 2);
 }
 

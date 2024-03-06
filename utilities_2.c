@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:45:26 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/03/06 11:04:13 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:49:11 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	create_index(t_stack *stack)
 
 long	ft_atoi2(const char *str, t_stack *stack)
 {
-	int			i;
 	long long	sign;
 	long long	res;
+	int			i;
 
 	res = 0;
 	sign = 1;
@@ -92,29 +92,27 @@ long	ft_atoi2(const char *str, t_stack *stack)
 			sign = -1;
 		i++;
 	}
+	while (str[i] == '0')
+		i++;
+	if (ft_strlen(str + i) > 10)
+		exit_program(stack, "Error\n");
+	res = calculate_value(str, i, sign, stack);
+	return ((res * sign));
+}
+
+long long	calculate_value(const char *str, int i, long long sign,
+		t_stack *stack)
+{
+	long long	res;
+
+	res = 0;
 	while (str[i])
 	{
 		if (!(str[i] >= '0' && str[i] <= '9'))
 			exit_program(stack, "Error\n");
 		res = res * 10 + (str[i++] - '0');
-		if (res > 2147483648 || (res * sign) < INT_MIN || ft_strlen(str) > 11)
+		if (res > 2147483648 || (res * sign) < INT_MIN)
 			exit_program(stack, "Error\n");
 	}
-	return ((res * sign));
-}
-
-void	exit_program(t_stack *stack, char *msg)
-{
-	if (msg)
-		write(2, msg, ft_strlen(msg));
-	if (stack != NULL)
-	{
-		if (stack->stack_a != NULL)
-			free(stack->stack_a);
-		if (stack->stack_b != NULL)
-			free(stack->stack_b);
-		if (stack->join_args != NULL)
-			free(stack->join_args);
-	}
-	exit(1);
+	return (res);
 }

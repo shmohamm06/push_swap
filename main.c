@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:43:05 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/03/04 22:55:44 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:59:14 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	main(int argc, char **argv)
 {
 	t_stack	stack;
 
+	if (argc < 2)
+		return (0);
 	validate_arguments(argc, argv);
 	initialize_stacks(argc, argv, &stack);
 	combine_arguments(argc, argv, &stack);

@@ -6,7 +6,7 @@
 /*   By: shmohamm <shmohamm@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 17:44:43 by shmohamm          #+#    #+#             */
-/*   Updated: 2024/03/06 11:02:43 by shmohamm         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:49:35 by shmohamm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,14 @@ void		validate_arguments(int argc, char **argv);
 void		initialize_stacks(int argc, char **argv, t_stack *stack);
 void		combine_arguments(int argc, char **argv, t_stack *stack);
 void		read_numbers(t_stack *stack);
+void		exit_program(t_stack *stack, char *msg);
 
 // Utilities_2
 int			is_stack_sorted(t_stack *stack);
 void		check_for_dup_or_sorted(t_stack *stack, int i);
 void		create_index(t_stack *stack);
 long		ft_atoi2(const char *str, t_stack *stack);
-void		exit_program(t_stack *stack, char *msg);
+long long	calculate_value(const char *str, int i, long long sign,
+				t_stack *stack);
 
 #endif
