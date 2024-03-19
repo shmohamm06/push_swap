@@ -6,7 +6,7 @@ YELLOW      = \033[33m
 
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 LIB_DIR = libft
 
 SRCS = main.c radix_sort.c push.c rotation.c sort_and_swap.c utilities_1.c utilities_2.c
